@@ -1554,6 +1554,7 @@ class MessageManager(
         // Find which contact sent this by matching the blinded hint
         var senderContact: Contact? = null
         for (contact in contacts) {
+            val contactPkHex = contact.sessionPublicKey.toHexString()
             Log.d(TAG, "handleIncomingMessageWithHint: checking ${contact.petname} (pk=${contactPkHex}...)")
             if (blindedHints.isHintForUs(receivedHint, contact.sessionPublicKey)) {
                 Log.d(TAG, "handleIncomingMessageWithHint: MATCH! sender=${contact.petname}")
