@@ -34,9 +34,10 @@ jobs:
       - name: Install cargo-ndk
         run: cargo install cargo-ndk
 
-      # 4. Native Rust-Bibliotheken kompilieren und in den jniLibs-Ordner ablegen
+      # 4. Native Rust-Bibliotheken im richtigen Unterordner kompilieren
       - name: Build Rust native library
-        run: cargo ndk -t arm64-v8a -t armeabi-v7a -o app/src/main/jniLibs build --release
+        working-directory: ./bedrock-core
+        run: cargo ndk -t arm64-v8a -t armeabi-v7a -o ../app/src/main/jniLibs build --release
 
       # 5. APK über Gradle kompilieren (wie im ersten Bild gefordert)
       - name: Build Android APK
